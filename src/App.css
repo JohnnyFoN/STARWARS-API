@@ -20,3 +20,69 @@
 .App-link {
   color: #09d3ac;
 }
+
+.title {
+  height: 100px;
+  background-color: black;
+  color: yellow;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userData {
+  background-color: white;
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.userData table {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  background-color: black;
+}
+
+.userData tbody {
+  background-color: yellow;
+}
+
+.userData thead {
+  color: yellow;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+}
+
+.pagination input {
+  padding: 3.6px 6px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 1px solid black;
+  font-size: 20px;
+  text-align: center;
+}
+
+.arrow {
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid black;
+  background-color: yellow;
+}
