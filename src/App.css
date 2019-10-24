@@ -54,6 +54,7 @@
 
 .userData tbody {
   background-color: yellow;
+  font-weight: bold;
 }
 
 .userData thead {
@@ -85,4 +86,116 @@
   transition: background-color 0.3s;
   border: 1px solid black;
   background-color: yellow;
+}
+
+.btnAddPost {
+  border: black solid 5px;
+  border-radius: 10px;
+  background-color: yellow;
+  color: black;
+  font-size: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  margin-left: 40%;
+  background-color: black;
+  margin-top: 50px;
+  padding: 10px;
+  border-radius: 5px;
+  border: black solid 5px;
+  width: 300px;
+  height: 400px;
+}
+
+.postBody {
+  height: 80px;
+  width: 280px;
+}
+
+.btnSave {
+  background-color: #9fc131;
+  width: 80px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  margin-top: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.btnCancel {
+  background-color: #ff0000;
+  width: 80px;
+  height: 50px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.btnClear {
+  background-color: orange;
+  width: 80px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  margin-top: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.btnEdit {
+  background-color: green;
+  width: 80px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  margin: 8px;
+}
+.modal h4 {
+  color: white;
+}
+
+.tableTitle {
+  color: yellow;
+}
+
+.userDropDown {
+  width: 200px;
+  height: 25px;
+  background-color: yellow;
+  border: 1px solid black;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.btnDelete {
+  background-color: red;
+  width: 80px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  margin: 8px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
 }

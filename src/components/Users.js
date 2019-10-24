@@ -28,8 +28,6 @@ class Users extends Component {
   }
 
   render() {
-    console.log(this.state.listOfUsers);
-
     return (
       <div className="userData">
         <table>
