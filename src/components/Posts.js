@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import PostForm from "./PostForm";
+import {
+  Redirect,
+  BrowserRouter,
+  Route,
+  Switch,
+  withRouter,
+  NavLink,
+  useHistory
+} from "react-router-dom";
+import PostDetails from "./PostDetails";
 
 class Posts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //users: props.listOfUsers,
       posts: props.listOfPosts,
       show: false,
       id: "",
@@ -13,6 +22,7 @@ class Posts extends Component {
       postTitle: "",
       postBody: ""
     };
+    //this.redirectToPost = this.redirectToPost.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,13 +32,10 @@ class Posts extends Component {
   }
 
   removePost(post) {
-    console.log(post);
-    //var postIndex = this.state.posts.findIndex(x => x.id === post.id);
-
+    alert("Are you sure you want to delete the post: " + post.title);
     var filtered = this.state.posts.filter(x => {
       return x.id !== post.id;
     });
-    console.log(filtered);
     this.setState({
       posts: filtered
     });
@@ -37,6 +44,7 @@ class Posts extends Component {
   populateTable() {
     return this.state.posts.map((post, index) => {
       const { userId, title, body, id } = post;
+      //debugger;
       return (
         <tr key={id}>
           <td>{userId}</td>
@@ -52,11 +60,16 @@ class Posts extends Component {
             <button className="btnDelete" onClick={e => this.removePost(post)}>
               Delete
             </button>
+
+            <button className="btnView">
+              <NavLink to={`/post/${post.id}`}>View post</NavLink>
+            </button>
           </td>
         </tr>
       );
     });
   }
+
   showModalWithValues = (e, post) => {
     this.setState({
       show: true,
@@ -115,3 +128,13 @@ class Posts extends Component {
 }
 
 export default Posts;
+
+/*
+
+            <button
+              className="btnView"
+              onClick={e => this.redirectToPost(post)}
+            >
+              View
+            </button>
+*/

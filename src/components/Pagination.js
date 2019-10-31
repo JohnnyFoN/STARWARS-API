@@ -23,13 +23,12 @@ class Pagination extends Component {
     if (pageNumber > this.props.lastPage) {
       pageNumber = this.props.lastPage;
     }
-    if (this.props.page === this.state.page) {
-      console.log("Same");
-      //this.props.createRequest(pageNumber);
-    } else {
-      console.log("Not same");
+    if (this.props.page !== this.state.page) {
+      this.props.paginatePage(pageNumber);
     }
-    this.props.paginatePage(pageNumber);
+    if (pageNumber != this.state.page) {
+      this.props.paginatePage(pageNumber);
+    }
   }
 
   handleChange(event) {
