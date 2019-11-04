@@ -8,7 +8,9 @@ class Header extends Component {
   render() {
     return (
       <div className="title">
-        <h1>STAR WARS</h1>
+        <h1>
+          STAR <br></br>WARS
+        </h1>
       </div>
     );
   }

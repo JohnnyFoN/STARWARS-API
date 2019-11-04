@@ -25,12 +25,14 @@
   height: 100px;
   background-color: black;
   color: yellow;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   text-align: center;
   font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
+  padding: 0px;
 }
 
 .userData {
@@ -281,4 +283,77 @@
   color: yellow;
   margin-bottom: 0px;
   margin-top: 15px;
+}
+
+.loader {
+  color: red;
+  margin-top: 25px;
+}
+
+.comments {
+  margin-top: 20px;
+}
+
+.commentsPostLabel {
+  background-color: yellow;
+  color: black;
+  padding: 10px;
+  width: 100%;
+}
+
+.comments table tbody {
+  text-align: left;
+  border-bottom: 1px solid yellow;
+}
+
+.comments table td {
+  border-bottom: 1px solid yellow;
+}
+
+.comments table th {
+  padding-bottom: 10px;
+  border-bottom: 3px solid yellow;
+  font-size: 20px;
+}
+
+.postFunctions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: yellow;
+}
+
+.postFunctions h2 {
+  color: yellow;
+  padding-left: 20px;
+}
+
+.postFunctions select {
+  margin-left: 30px;
+  margin-top: 25px;
+}
+
+.searchBox {
+  margin-top: 27px;
+  height: 21px;
+  width: 180px;
+  margin-left: 30px;
+  background-color: yellow;
+  border: none;
+  font-weight: bold;
+  color: Black;
+  font-size: 16px;
+}
+
+.btnSearchPostTitle {
+  border: black solid 5px;
+  border-radius: 10px;
+  background-color: yellow;
+  color: black;
+  font-size: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
