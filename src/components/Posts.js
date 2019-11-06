@@ -20,7 +20,9 @@ class Posts extends Component {
       id: "",
       userId: "",
       postTitle: "",
-      postBody: ""
+      postBody: "",
+      searchvalue: "",
+      dropBoxValue: null
     };
     this.handleDBChange = this.handleDBChange.bind(this);
   }
@@ -51,35 +53,6 @@ class Posts extends Component {
     });
     this.setState({
       posts: filtered
-    });
-  }
-
-  populateTable() {
-    return this.state.posts.map((post, index) => {
-      const { userId, title, body, id } = post;
-      //debugger;
-      return (
-        <tr key={id}>
-          <td>{userId}</td>
-          <td>{title}</td>
-          <td>{body}</td>
-          <td className="buttons">
-            <button
-              className="btnEdit"
-              onClick={e => this.showModalWithValues(e, post)}
-            >
-              Edit post
-            </button>
-            <button className="btnDelete" onClick={e => this.removePost(post)}>
-              Delete
-            </button>
-
-            <button className="btnView">
-              <NavLink to={`/post/${post.id}`}>View post</NavLink>
-            </button>
-          </td>
-        </tr>
-      );
     });
   }
 
@@ -118,23 +91,26 @@ class Posts extends Component {
 
   handleDBChange(event, typeOfFilter) {
     let usersPost = this.props.listOfPosts;
-    let val = event.nativeEvent.target.value;
-    var filtered = [];
-    // if (typeOfFilter === "s") {
-    //   words = event.target.value;
-    // } else {
-    //   words = "";
-    // }
-    //filtered = usersPost.filter(x => x.title.match(words)); //&& x.userId === parseInt(val)
+    var filtered;
+
     if (typeOfFilter === "s") {
-      filtered = usersPost.filter(x => x.title.match(event.target.value));
+      this.searchValue = event.target.value;
     }
+
     if (typeOfFilter === "db") {
-      filtered = usersPost.filter(x => x.userId === parseInt(val));
+      this.dropBoxValue = event.target.value;
     }
-    filtered = usersPost.filter(
-      x => x.title.match(event.target.value) || x.userId === parseInt(val)
-    );
+
+    if (this.searchValue) {
+      filtered = usersPost.filter(x => !!x.title.match(this.searchValue));
+    } else {
+      filtered = usersPost;
+    }
+
+    if (this.dropBoxValue) {
+      filtered = filtered.filter(x => x.userId == this.dropBoxValue);
+    }
+
     this.setState({
       posts: filtered
     });
@@ -148,6 +124,35 @@ class Posts extends Component {
         posts: listWithTitle
       });
     }
+  }
+  populateTable() {
+    let posts = this.state.posts || [];
+    return posts.map((post, index) => {
+      const { userId, title, body, id } = post;
+      //debugger;
+      return (
+        <tr key={id}>
+          <td>{userId}</td>
+          <td>{title}</td>
+          <td>{body}</td>
+          <td className="buttons">
+            <button
+              className="btnEdit"
+              onClick={e => this.showModalWithValues(e, post)}
+            >
+              Edit post
+            </button>
+            <button className="btnDelete" onClick={e => this.removePost(post)}>
+              Delete
+            </button>
+
+            <button className="btnView">
+              <NavLink to={`/post/${post.id}`}>View post</NavLink>
+            </button>
+          </td>
+        </tr>
+      );
+    });
   }
 
   render() {
@@ -169,10 +174,10 @@ class Posts extends Component {
           <input
             className="searchBox"
             type="text"
-            onKeyDown={e => {
-              this.handleDBChange(e, "s");
+            onChange={e => {
+              this.handleDBChange(e, "s"); //onKeyDown
             }}
-            placeholder="Search.."
+            placeholder="Search..."
           />
 
           <h2>Filter by user:</h2>
