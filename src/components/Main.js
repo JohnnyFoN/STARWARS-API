@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Posts from "./Posts";
 
+import { getAllPosts } from "../actions/actionIndex";
+
 var x = 1;
 var getResult = false;
 class Main extends Component {
@@ -35,6 +37,8 @@ class Main extends Component {
   }
 
   componentDidMount() {
+    debugger;
+
     fetch(`https://jsonplaceholder.typicode.com/posts`)
       .then(response => response.json())
       .then((getResult = true))
@@ -47,6 +51,10 @@ class Main extends Component {
           listOfPosts: res
         });
       });
+    this.props.store.dispatch({
+      type: "GET_ALL_POSTS",
+      listOfPosts: this.state.listOfPosts
+    });
   }
 
   render() {

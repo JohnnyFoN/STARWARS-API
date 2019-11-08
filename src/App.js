@@ -16,16 +16,18 @@ class App extends React.Component {
     super(props);
   }
 
-  //<Route path="/" component={Navigation} exact />
-  //
-
   render() {
     return (
       <div className="App">
         <BrowserRouter>
           <Navigation />
           <Switch>
-            <Route path="/" component={All} exact />}
+            <Route
+              path="/"
+              component={() => <All store={this.props.store} />}
+              exact
+            />
+            }
             <Route path="/iv" component={EpisodeIV} />
             <Route path="/v" component={EpisodeV} />
             <Route path="/vi" component={EpisodeVI} />
