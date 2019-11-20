@@ -1,10 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PostsApi from "../services/api/PostsApi";
+import Action from "../redux/posts/actions";
 import Posts from "./Posts";
 
-import { getAllPosts } from "../actions/actionIndex";
-
-var x = 1;
-var getResult = false;
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -14,16 +13,30 @@ class Main extends Component {
       id: "",
       userId: "",
       title: "Missing title",
-      body: "Missing body"
+      body: "Missing body",
+      error: ""
     };
     this.updatePost = this.updatePost.bind(this);
   }
 
-  addPostToList(post) {
-    this.setState({
-      listOfPosts: [...this.state.listOfPosts, post]
-    });
+  componentDidMount() {
+    const { getPosts } = this.props;
+    debugger;
+    PostsApi.getAll()
+      .then(posts => {
+        getPosts(posts);
+      })
+      .catch(err => {
+        this.setState({
+          error: String(err)
+        });
+      });
   }
+
+  addPostToList = post => {
+    const { addPost } = this.props;
+    addPost(post);
+  };
 
   updatePost(post) {
     var postIndex = this.state.listOfPosts.findIndex(x => x.id === post.id);
@@ -36,94 +49,34 @@ class Main extends Component {
     });
   }
 
-  componentDidMount() {
-    debugger;
-
-    fetch(`https://jsonplaceholder.typicode.com/posts`)
-      .then(response => response.json())
-      .then((getResult = true))
-      .catch(function() {
-        console.log("Request failed");
-        getResult = false;
-      })
-      .then(res => {
-        this.setState({
-          listOfPosts: res
-        });
-      });
-    this.props.store.dispatch({
-      type: "GET_ALL_POSTS",
-      listOfPosts: this.state.listOfPosts
-    });
-  }
-
   render() {
+    const { posts } = this.props;
     return (
       <div>
         <Posts
-          listOfPosts={this.state.listOfPosts}
+          listOfPosts={posts}
           addPostToList={post => this.addPostToList(post)}
           updatePost={post => this.updatePost(post)}
           listOfUsers={this.state.listOfUsers}
+          store={this.props.store}
         />
       </div>
     );
   }
 }
 
-export default Main;
-/*
-
-consturctor:
-listOfUsers: [],
-currentPage: 0,
-lastPage: 0,
-
-paginatePage(pageNumber) {
-    this.createRequest(pageNumber);
+export default connect(
+  state => ({
+    // Properties
+    posts: state.postsReducer.posts
+  }),
+  {
+    // Functions
+    getPosts: Action.getPosts,
+    editPost: Action.editPost,
+    addPost: Action.addPost,
+    deletePost: Action.deletePost,
+    viewPost: Action.viewPost,
+    filterPosts: Action.filterPosts
   }
-
-<Users listOfUsers={this.state.listOfUsers} />
-
-<Pagination
-page={this.state.currentPage}
-lastPage={this.state.lastPage}
-paginatePage={this.paginatePage}
-/>
-*/
-/*
-USERS:
-
-
-      .then(
-        fetch(`https://jsonplaceholder.typicode.com/posts`)
-          .then(response => response.json())
-          .catch(function() {
-            console.log("Request faild");
-          })
-          .then(res => {
-            this.setState({
-              listOfUsers: res
-            });
-          })
-      );
-
-
-*/
-
-// replacePost = i => {
-//   // debugger;
-//   this.setState(state => {
-//     const postList = this.state.listOfPosts.map((post, j) => {
-//       if (j === i) {
-//         return post;
-//       } else {
-//         //
-//       }
-//     });
-//     console.log(postList);
-//     return {
-//       postList
-//     };
-//   });
-// };
+)(Main);

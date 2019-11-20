@@ -39,7 +39,6 @@ class PostForm extends Component {
         userId: nextProps.selectedPost.userId,
         title: nextProps.selectedPost.title,
         body: nextProps.selectedPost.body
-        //userFullName: this.getUserFullName(nextProps.selectedPost.userId)
       });
     } else {
       this.setState({
@@ -47,7 +46,6 @@ class PostForm extends Component {
         userId: "",
         title: "",
         body: ""
-        //userFullName: this.getUserFullName(nextProps.selectedPost.userId)
       });
     }
   }
@@ -120,11 +118,10 @@ class PostForm extends Component {
   }
 
   handleDBChange(event) {
-    //debugger
     var index = event.nativeEvent.target.selectedIndex;
     var x = event.nativeEvent.target[index].text;
-    var changedUser = this.state.listOfUsers.filter(u => u.name === x); //find ako nadje vraca {} ako ne undefined
-    var changedUserId = changedUser[0].id; //changedUser.id => changedUser && changedUser.id
+    var changedUser = this.state.listOfUsers.filter(u => u.name === x);
+    var changedUserId = changedUser[0].id;
     this.setState({
       userId: changedUserId
     });

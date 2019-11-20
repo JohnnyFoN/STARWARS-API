@@ -15,8 +15,11 @@ class Navigation extends Component {
         <NavLink className="navElement" to="/v">
           Episode V
         </NavLink>
-        <NavLink className="navElement" id="nav4" to="/vi">
+        <NavLink className="navElement" to="/vi">
           Episode VI
+        </NavLink>
+        <NavLink className="navElement" id="nav4" to="/daredevil">
+          Daredevil
         </NavLink>
       </div>
     );

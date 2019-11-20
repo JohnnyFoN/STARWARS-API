@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import PostForm from "./PostForm";
+import { connect } from "react-redux";
+import PostsApi from "../services/api/PostsApi";
+import Action from "../redux/posts/actions";
+
 import {
   Redirect,
   BrowserRouter,
@@ -14,7 +18,6 @@ class Posts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: props.listOfPosts,
       users: [],
       show: false,
       id: "",
@@ -46,15 +49,11 @@ class Posts extends Component {
       });
   }
 
-  removePost(post) {
+  removePost = post => {
+    const { deletePost } = this.props;
     alert("Are you sure you want to delete the post: " + post.title);
-    var filtered = this.state.posts.filter(x => {
-      return x.id !== post.id;
-    });
-    this.setState({
-      posts: filtered
-    });
-  }
+    deletePost(post);
+  };
 
   showModalWithValues = (e, post) => {
     this.setState({
@@ -90,7 +89,8 @@ class Posts extends Component {
   }
 
   handleDBChange(event, typeOfFilter) {
-    let usersPost = this.props.listOfPosts;
+    const { posts } = this.props;
+    //let usersPost = posts;
     var filtered;
 
     if (typeOfFilter === "s") {
@@ -102,9 +102,9 @@ class Posts extends Component {
     }
 
     if (this.searchValue) {
-      filtered = usersPost.filter(x => !!x.title.match(this.searchValue));
+      filtered = posts.filter(x => !!x.title.match(this.searchValue));
     } else {
-      filtered = usersPost;
+      filtered = posts;
     }
 
     if (this.dropBoxValue) {
@@ -116,17 +116,8 @@ class Posts extends Component {
     });
   }
 
-  onEnterPress(e) {
-    let userPost = this.props.listOfPosts;
-    if (e.key === "Enter") {
-      var listWithTitle = userPost.filter(x => x.title.match(e.target.value));
-      this.setState({
-        posts: listWithTitle
-      });
-    }
-  }
   populateTable() {
-    let posts = this.state.posts || [];
+    let posts = this.state.posts || []; //
     return posts.map((post, index) => {
       const { userId, title, body, id } = post;
       //debugger;
@@ -175,7 +166,7 @@ class Posts extends Component {
             className="searchBox"
             type="text"
             onChange={e => {
-              this.handleDBChange(e, "s"); //onKeyDown
+              this.handleDBChange(e, "s");
             }}
             placeholder="Search..."
           />
@@ -214,17 +205,16 @@ class Posts extends Component {
   }
 }
 
-export default Posts;
-
-/*
-
-            <button
-              className="btnView"
-              onClick={e => this.redirectToPost(post)}
-            >
-              View
-            </button>
-
-
-            <button className="btnSearchPostTitle">Search</button>
-*/
+export default connect(
+  state => ({
+    posts: state.postsReducer.posts
+  }),
+  {
+    getPosts: Action.getPosts,
+    editPost: Action.editPost,
+    addPost: Action.addPost,
+    deletePost: Action.deletePost,
+    viewPost: Action.viewPost,
+    filterPosts: Action.filterPosts
+  }
+)(Posts);

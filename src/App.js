@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/Header";
-import Main from "./components/Main";
+
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import EpisodeIV from "./components/Episodes/EpisodeIV";
 import EpisodeV from "./components/Episodes/EpisodeV";
@@ -10,6 +9,7 @@ import Error from "./components/Error";
 import Navigation from "./components/Navigation";
 import All from "./components/All";
 import PostDetails from "./components/PostDetails";
+import Daredevil from "./components/Episodes/Daredevil";
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +31,7 @@ class App extends React.Component {
             <Route path="/iv" component={EpisodeIV} />
             <Route path="/v" component={EpisodeV} />
             <Route path="/vi" component={EpisodeVI} />
+            <Route path="/daredevil" component={Daredevil} />
             <Route path="/post/:id" component={PostDetails} />
             <Route component={Error} />
           </Switch>

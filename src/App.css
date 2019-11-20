@@ -239,6 +239,14 @@
   margin-top: 20px;
 }
 
+.daredevil {
+  color: darkred;
+  margin-left: 10px;
+  margin-top: 20px;
+  font-style: italic;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
 .err {
   color: white;
   margin-left: 10px;
@@ -356,4 +364,88 @@
   margin-left: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+/*GALLERY CSS*/
+
+#galleryBody {
+  display: flex;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+#cover {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#cover img {
+  margin-top: 50px;
+}
+
+.cover {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+img {
+  display: flex;
+  align-self: center;
+}
+
+/* Slide show css */
+
+#slideshow {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 100%;
+  background-color: rgba(50, 50, 50, 0.7);
+}
+
+#lb {
+  background-color: red;
+  margin-right: 15px;
+  height: 150px;
+  width: 30px;
+  border-style: none;
+  font-size: 25px;
+}
+
+#rb {
+  background-color: red;
+  margin-left: 15px;
+  height: 150px;
+  width: 30px;
+  border-style: none;
+  font-size: 25px;
+}
+
+#cb {
+  background-color: black;
+  margin-left: 15px;
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  font-size: 25px;
+  color: red;
+  margin-bottom: 450px;
+}
+
+#cb:hover {
+  color: black;
+  background-color: red;
+}
+
+#slideshowInner {
+  display: flex;
+  justify-content: center;
 }
