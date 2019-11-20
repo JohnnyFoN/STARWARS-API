@@ -90,7 +90,6 @@ class Posts extends Component {
 
   handleDBChange(event, typeOfFilter) {
     const { posts } = this.props;
-    //let usersPost = posts;
     var filtered;
 
     if (typeOfFilter === "s") {
@@ -117,10 +116,9 @@ class Posts extends Component {
   }
 
   populateTable() {
-    let posts = this.state.posts || []; //
+    let posts = this.state.posts || [];
     return posts.map((post, index) => {
       const { userId, title, body, id } = post;
-      //debugger;
       return (
         <tr key={id}>
           <td>{userId}</td>
@@ -136,10 +134,9 @@ class Posts extends Component {
             <button className="btnDelete" onClick={e => this.removePost(post)}>
               Delete
             </button>
-
-            <button className="btnView">
-              <NavLink to={`/post/${post.id}`}>View post</NavLink>
-            </button>
+            <NavLink to={`/post/${post.id}`}>
+              <button className="btnView">View post</button>
+            </NavLink>
           </td>
         </tr>
       );

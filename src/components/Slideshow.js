@@ -6,7 +6,6 @@ class Slideshow extends Component {
     super(props);
     this.state = {
       covers: props.covers,
-      chosenCover: undefined,
       show: props.show
     };
   }
@@ -29,7 +28,6 @@ class Slideshow extends Component {
       this.state.covers[this.state.covers.length - 1]
     );
     var first = this.state.covers.indexOf(this.state.covers[0]);
-
     var chosen = this.state.covers.indexOf(this.state.chosenCover);
 
     if (chosen === last) {

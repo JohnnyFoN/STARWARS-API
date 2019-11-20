@@ -100,7 +100,7 @@ class PostDetails extends Component {
   render() {
     if (this.state.isLoading === true) {
       return (
-        <div>
+        <div className="imperialLoader">
           <img src="https://cdn.dribbble.com/users/361263/screenshots/3051905/imperial_emblem.gif" />
           )
         </div>

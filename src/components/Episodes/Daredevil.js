@@ -23,7 +23,9 @@ class Daredevil extends Component {
     super(props);
     this.state = {
       show: false,
-      covers: imageURLArray
+      covers: imageURLArray,
+      toggled: false,
+      theme: "galleryPageBlack"
       //chosenCover: null
     };
   }
@@ -42,20 +44,41 @@ class Daredevil extends Component {
   getImages = () => {
     var coverList = this.state.covers;
     return coverList.map(cover => (
-      <img src={cover} onClick={e => this.showSlider(e, cover)} />
+      <img
+        className="imageCover"
+        src={cover}
+        onClick={e => this.showSlider(e, cover)}
+      />
     ));
   };
 
+  toggleTheme = () => {
+    var themeColor;
+    this.setState({
+      toggled: !this.state.toggled
+    });
+    this.state.toggled === false
+      ? (themeColor = "galleryPageRed")
+      : (themeColor = "galleryPageBlack");
+    this.setState({
+      theme: themeColor
+    });
+  };
   render() {
     return (
-      <div>
+      <div className={this.state.theme}>
         <Slideshow
           covers={this.state.covers}
           chosenCover={this.state.chosenCover}
           show={this.state.show}
           hideSlider={this.hideSlider}
         />
-        <h1 className="daredevil">DAREDEVIL</h1>
+        <div className="toggleBtn">
+          <label class="switch">
+            <input type="checkbox" onClick={() => this.toggleTheme()} />
+            <span class="slider round"></span>
+          </label>
+        </div>
         <div id="galleryBody">
           <div id="cover">{this.getImages()}</div>
         </div>
