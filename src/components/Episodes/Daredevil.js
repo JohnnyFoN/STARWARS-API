@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Slideshow from "../Slideshow";
+import brokenCover from "../../../src/broken.jpg";
+
 var imageURLArray = [
   "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/772889/772889._SX270_QL80_TTD_.jpg",
   "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/736597/736597._SX270_QL80_TTD_.jpg",
@@ -25,8 +27,8 @@ class Daredevil extends Component {
       show: false,
       covers: imageURLArray,
       toggled: false,
-      theme: "galleryPageBlack"
-      //chosenCover: null
+      theme: "galleryPageBlack",
+      isLoading: true
     };
   }
 
@@ -41,11 +43,25 @@ class Daredevil extends Component {
     this.setState({ show: false, chosenCover: null });
   };
 
+  handleLoad = e => {
+    this.setState({
+      isLoading: true
+    });
+  };
+
+  handleImageError = e => {
+    e.target.src = brokenCover;
+    this.setState({
+      chosenCover: brokenCover
+    });
+  };
+
   getImages = () => {
     var coverList = this.state.covers;
     return coverList.map(cover => (
       <img
         className="imageCover"
+        onError={e => this.handleImageError(e)}
         src={cover}
         onClick={e => this.showSlider(e, cover)}
       />
@@ -64,6 +80,7 @@ class Daredevil extends Component {
       theme: themeColor
     });
   };
+
   render() {
     return (
       <div className={this.state.theme}>

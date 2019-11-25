@@ -14,14 +14,15 @@ class Main extends Component {
       userId: "",
       title: "Missing title",
       body: "Missing body",
-      error: ""
+      error: "",
+      toggled: false,
+      theme: "galleryPageBlack"
     };
     this.updatePost = this.updatePost.bind(this);
   }
 
   componentDidMount() {
     const { getPosts } = this.props;
-    debugger;
     PostsApi.getAll()
       .then(posts => {
         getPosts(posts);
@@ -48,6 +49,19 @@ class Main extends Component {
       listOfPosts: filtered
     });
   }
+
+  toggleTheme = () => {
+    var themeColor;
+    this.setState({
+      toggled: !this.state.toggled
+    });
+    this.state.toggled === false
+      ? (themeColor = "galleryPageRed")
+      : (themeColor = "galleryPageBlack");
+    this.setState({
+      theme: themeColor
+    });
+  };
 
   render() {
     const { posts } = this.props;

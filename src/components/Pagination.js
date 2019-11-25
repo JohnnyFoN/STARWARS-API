@@ -5,29 +5,36 @@ class Pagination extends Component {
     super(props);
     this.state = {
       page: props.page,
-      totalPages: props.lastPage
+      totalPages: props.numberOfPages
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      page: nextProps.page,
-      totalPages: nextProps.lastPage
-    });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     page: nextProps.page,
+  //     totalPages: nextProps.numberOfPages
+  //   });
+  // }
 
-  changePage(pageNumber) {
-    if (pageNumber <= 0) {
-      pageNumber = 1;
+  changePage(direction) {
+    // if (pageNumber <= 0) {
+    //   pageNumber = 1;
+    // }
+    // if (pageNumber > this.props.numberOfPages) {
+    //   pageNumber = this.state.totalPages;
+    // }
+    // if (this.props.page !== this.state.page) {
+    //   this.props.paginatePage(pageNumber);
+    // }
+    // if (pageNumber != this.state.page) {
+    //   this.props.paginatePage(pageNumber);
+    // }
+
+    if (direction === "right") {
+      this.props.repopulateTable(10);
     }
-    if (pageNumber > this.props.lastPage) {
-      pageNumber = this.props.lastPage;
-    }
-    if (this.props.page !== this.state.page) {
-      this.props.paginatePage(pageNumber);
-    }
-    if (pageNumber != this.state.page) {
-      this.props.paginatePage(pageNumber);
+    if (direction === "left") {
+      this.props.repopulateTable(-10);
     }
   }
 
@@ -44,10 +51,10 @@ class Pagination extends Component {
   }
 
   render() {
-    var p = this.state.page;
+    var p = this.props.page;
     return (
       <div className="pagination">
-        <a href="#" className="arrow" onClick={() => this.changePage(p - 1)}>
+        <a className="arrow" onClick={() => this.changePage("left")}>
           ❮
         </a>
         <a>
@@ -58,7 +65,7 @@ class Pagination extends Component {
             onKeyDown={e => this.handleSubmit(e)}
           />
         </a>
-        <a href="#" className="arrow" onClick={() => this.changePage(p + 1)}>
+        <a className="arrow" onClick={() => this.changePage("right")}>
           ❯
         </a>
       </div>

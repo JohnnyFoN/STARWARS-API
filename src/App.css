@@ -88,6 +88,7 @@
   transition: background-color 0.3s;
   border: 1px solid black;
   background-color: yellow;
+  cursor: pointer;
 }
 
 .btnAddPost {
@@ -313,6 +314,7 @@
 
 .comments {
   margin-top: 20px;
+  height: 100%;
 }
 
 .commentsPostLabel {
@@ -329,6 +331,14 @@
 
 .comments table td {
   border-bottom: 1px solid yellow;
+}
+
+.comments table tbody tr {
+  height: 100%;
+}
+
+.comments table tr {
+  width: 100%;
 }
 
 .comments table th {
@@ -396,6 +406,8 @@
 
 #cover img {
   margin-top: 50px;
+  background: url("http://www.hondaelsalvador.com/img/recall/load.gif") 50%
+    no-repeat;
 }
 
 .cover {
@@ -486,7 +498,7 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: black;
+  background-color: red;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   border: 2px solid yellow;
@@ -505,13 +517,13 @@ img {
 }
 
 input:checked + .slider {
-  background-color: red;
+  background-color: black;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(44px);
-  -ms-transform: translateX(44px);
-  transform: translateX(44px);
+  -webkit-transform: translateX(43px);
+  -ms-transform: translateX(43px);
+  transform: translateX(43px);
 }
 
 .slider.round {
@@ -525,6 +537,7 @@ input:checked + .slider:before {
 .toggleBtn {
   float: right;
   margin-right: 30px;
+  margin-top: 10px;
 }
 
 .galleryPageRed {
@@ -533,4 +546,9 @@ input:checked + .slider:before {
 
 .galleryPageBlack {
   background-color: black;
+}
+
+.comments {
+  width: 100%;
+  height: 100%;
 }

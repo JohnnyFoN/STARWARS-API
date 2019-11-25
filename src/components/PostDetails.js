@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { async } from "q";
+import Pagination from "./Pagination";
 var getResult = false;
 var postsFetched = false;
 class PostDetails extends Component {
   constructor(props) {
-    //debugger;
     super(props);
     this.state = {
       id: "",
@@ -16,7 +16,11 @@ class PostDetails extends Component {
       email: "",
       listOfComments: [],
       commenter: "",
-      commentText: ""
+      commentText: "",
+      page: 1,
+      numberOfPages: 0,
+      fromPage: 0,
+      toPage: 10
     };
   }
 
@@ -78,24 +82,51 @@ class PostDetails extends Component {
       })
       .then(res => {
         this.setState({
-          listOfComments: res
+          listOfComments: res,
+          numberOfPages: res.length / 10
         });
       });
   }
 
   populateCommentsTable() {
-    debugger;
-    return this.state.listOfComments.map((comment, index) => {
-      const { email, body, id } = comment;
-      //debugger;
-      return (
-        <tr key={id}>
-          <td>{email}</td>
-          <td>{body}</td>
-        </tr>
-      );
-    });
+    return this.state.listOfComments
+      .slice(this.state.fromPage, this.state.toPage)
+      .map((comment, index) => {
+        const { email, body, id } = comment;
+        return (
+          <tr key={id}>
+            <td>{email}</td>
+            <td>{body}</td>
+          </tr>
+        );
+      });
   }
+
+  repopulateTable = x => {
+    if (this.state.page === this.state.numberOfPages) {
+      this.setState({
+        fromPage: (this.state.fromPage = 0),
+        toPage: (this.state.toPage = 10),
+        page: (this.state.page = 1)
+      });
+    }
+    // if (this.state.page === 0) {
+    //   this.setState({
+    //     fromPage: (this.state.fromPage = (this.state.numberOfPages - 10) / x),
+    //     toPage: (this.state.toPage = this.state.numberOfPages / x),
+    //     page: (this.state.page = this.state.numberOfPages)
+    //   });
+    // }
+    else {
+      this.setState({
+        fromPage: (this.state.fromPage += x),
+        toPage: (this.state.toPage += x),
+        page: (this.state.page += x / 10)
+      });
+    }
+
+    console.log(this.state.page);
+  };
 
   render() {
     if (this.state.isLoading === true) {
@@ -132,6 +163,11 @@ class PostDetails extends Component {
               </thead>
               <tbody>{this.populateCommentsTable()}</tbody>
             </table>
+            <Pagination
+              page={this.state.page}
+              numberOfPages={this.state.numberOfPages}
+              repopulateTable={x => this.repopulateTable(x)}
+            />
           </div>
         </div>
       );
@@ -140,33 +176,3 @@ class PostDetails extends Component {
 }
 
 export default PostDetails;
-/*
-<div className="btns">
-            <button className="btnEdit">Edit post</button>
-            <button className="btnDelete">Delete</button>
-          </div>
-
-*/
-/*
- componentDidMount() {
-    fetch(
-      `https://jsonplaceholder.typicode.com/posts/${this.props.match.params.id}`
-    )
-      .then(response => response.json())
-      .then((getResult = true))
-      .catch(function() {
-        console.log("Request failed");
-        getResult = false;
-      })
-      .then(res => {
-        this.setState({
-          id: res.id,
-          title: res.title,
-          body: res.body,
-          userId: res.userId
-        });
-        getResult = true;
-        this.fetchTheUser(this.state.userId);
-      });
-  }
-*/
