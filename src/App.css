@@ -334,7 +334,7 @@
 }
 
 .comments table tbody tr {
-  height: 100%;
+  height: 50px;
 }
 
 .comments table tr {
@@ -542,10 +542,12 @@ input:checked + .slider:before {
 
 .galleryPageRed {
   background-color: red;
+  transition: background-color 700ms linear;
 }
 
 .galleryPageBlack {
   background-color: black;
+  transition: background-color 700ms linear;
 }
 
 .comments {

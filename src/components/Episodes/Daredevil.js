@@ -6,7 +6,7 @@ var imageURLArray = [
   "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/772889/772889._SX270_QL80_TTD_.jpg",
   "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/736597/736597._SX270_QL80_TTD_.jpg",
   "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/744276/744276._SX270_QL80_TTD_.jpg",
-  "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/750629/750629._SX270_QL80_TTD_.jpg",
+  "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/750629/750629._SX270_QL80_TTD_.jp",
   "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/758777/758777._SX270_QL80_TTD_.jpg",
   "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/758782/758782._SX270_QL80_TTD_.jpg",
   "https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/Item/806684/806684._SX270_QL80_TTD_.jpg",

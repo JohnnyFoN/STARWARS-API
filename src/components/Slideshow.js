@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { checkServerIdentity } from "tls";
+import brokenCover from "../../src/broken.jpg";
 var n = 0;
 class Slideshow extends Component {
   constructor(props) {
@@ -52,6 +53,13 @@ class Slideshow extends Component {
     });
   };
 
+  handleImageError = e => {
+    e.target.src = brokenCover;
+    this.setState({
+      chosenCover: brokenCover
+    });
+  };
+
   render() {
     if (!this.props.show) {
       return null;
@@ -68,7 +76,10 @@ class Slideshow extends Component {
           </button>
         </div>
         <div id="slideshowInner">
-          <img src={this.state.chosenCover} />
+          <img
+            src={this.state.chosenCover}
+            onError={e => this.handleImageError(e)}
+          />
         </div>
         <div className="btn">
           <button

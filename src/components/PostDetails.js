@@ -19,8 +19,8 @@ class PostDetails extends Component {
       commentText: "",
       page: 1,
       numberOfPages: 0,
-      fromPage: 0,
-      toPage: 10
+      fromComment: 0,
+      toComment: 10
     };
   }
 
@@ -90,7 +90,7 @@ class PostDetails extends Component {
 
   populateCommentsTable() {
     return this.state.listOfComments
-      .slice(this.state.fromPage, this.state.toPage)
+      .slice(this.state.fromComment, this.state.toComment)
       .map((comment, index) => {
         const { email, body, id } = comment;
         return (
@@ -102,30 +102,56 @@ class PostDetails extends Component {
       });
   }
 
-  repopulateTable = x => {
-    if (this.state.page === this.state.numberOfPages) {
-      this.setState({
-        fromPage: (this.state.fromPage = 0),
-        toPage: (this.state.toPage = 10),
-        page: (this.state.page = 1)
-      });
-    }
-    // if (this.state.page === 0) {
-    //   this.setState({
-    //     fromPage: (this.state.fromPage = (this.state.numberOfPages - 10) / x),
-    //     toPage: (this.state.toPage = this.state.numberOfPages / x),
-    //     page: (this.state.page = this.state.numberOfPages)
-    //   });
-    // }
-    else {
-      this.setState({
-        fromPage: (this.state.fromPage += x),
-        toPage: (this.state.toPage += x),
-        page: (this.state.page += x / 10)
-      });
-    }
+  repopulateTableForPage = p => {
+    this.setState({
+      fromComment: p * 10 - 10,
+      toComment: p * 10,
+      page: p
+    });
+  };
 
-    console.log(this.state.page);
+  repopulateTable = x => {
+    var thePage = parseInt(this.state.page);
+    if (thePage > 1 && this.state.page < this.state.numberOfPages) {
+      this.setState({
+        fromComment: (this.state.fromComment += x),
+        toComment: (this.state.toComment += x),
+        page: (thePage += x / 10)
+      });
+    } else {
+      if (thePage === this.state.numberOfPages) {
+        if (x < 0) {
+          this.setState({
+            fromComment: (this.state.fromComment += x),
+            toComment: (this.state.toComment += x),
+            page: (thePage += x / 10)
+          });
+        }
+        if (x > 0) {
+          this.setState({
+            fromComment: 0,
+            toComment: 10,
+            page: 1
+          });
+        }
+      }
+      if (thePage === 1) {
+        if (x > 0) {
+          this.setState({
+            fromComment: (this.state.fromComment += x),
+            toComment: (this.state.toComment += x),
+            page: (thePage += x / 10)
+          });
+        }
+        if (x < 0) {
+          this.setState({
+            fromComment: 490,
+            toComment: 500,
+            page: this.state.numberOfPages
+          });
+        }
+      }
+    }
   };
 
   render() {
@@ -167,6 +193,7 @@ class PostDetails extends Component {
               page={this.state.page}
               numberOfPages={this.state.numberOfPages}
               repopulateTable={x => this.repopulateTable(x)}
+              repopulateTableForPage={p => this.repopulateTableForPage(p)}
             />
           </div>
         </div>
