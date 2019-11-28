@@ -20,7 +20,14 @@ export default (state = initialState, { type, payload }) => {
     case EVENT.DELETE_POST:
       return {
         ...state,
-        posts: [...state.posts.filter(p => p != payload)]
+        posts: state.posts.filter(p => p != payload)
+      };
+    case EVENT.EDIT_POST:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post.id === payload.id ? payload : post
+        )
       };
     case EVENT.FILTER_POSTS:
       return {};

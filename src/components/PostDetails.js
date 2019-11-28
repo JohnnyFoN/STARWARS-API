@@ -183,8 +183,8 @@ class PostDetails extends Component {
             <table>
               <thead>
                 <tr>
-                  <th>Posted by</th>
-                  <th>Post content</th>
+                  <th className="posted">Posted by</th>
+                  <th className="content">Post content</th>
                 </tr>
               </thead>
               <tbody>{this.populateCommentsTable()}</tbody>

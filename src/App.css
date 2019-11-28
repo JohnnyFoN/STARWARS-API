@@ -314,7 +314,6 @@
 
 .comments {
   margin-top: 20px;
-  height: 100%;
 }
 
 .commentsPostLabel {
@@ -337,6 +336,9 @@
   height: 50px;
 }
 
+.posted {
+  width: 280px;
+}
 .comments table tr {
   width: 100%;
 }

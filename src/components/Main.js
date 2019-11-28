@@ -39,16 +39,11 @@ class Main extends Component {
     addPost(post);
   };
 
-  updatePost(post) {
-    var postIndex = this.state.listOfPosts.findIndex(x => x.id === post.id);
-
-    var filtered = this.state.listOfPosts.filter(x => x.id !== post.id);
-    filtered.splice(postIndex, 0, post);
-
-    this.setState({
-      listOfPosts: filtered
-    });
-  }
+  updatePost = post => {
+    debugger;
+    const { editPost } = this.props;
+    editPost(post);
+  };
 
   toggleTheme = () => {
     var themeColor;
